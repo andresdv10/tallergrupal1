@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: El Método de Sustitución en la Ingeniería</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            min-height: 80px;
+            font-weight: bold;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #7a5195;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .integral-icon {
+            font-size: 4rem; 
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center mb-12">
+            <div class="text-[#003f5c] mb-4 integral-icon">∫</div>
+            <h1 class="text-4xl md:text-5xl font-black text-[#003f5c] mb-2">El Método de Sustitución</h1>
+            <p class="text-xl md:text-2xl text-[#374c80]">Una Herramienta Esencial para la Ingeniería</p>
+        </header>
+
+        <main>
+            <section id="introduction" class="mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 text-center">
+                    <h2 class="text-2xl font-bold text-[#003f5c] mb-4">¿Qué es el Cambio de Variable?</h2>
+                    <p class="max-w-3xl mx-auto mb-4">
+                        La sustitución, o cambio de variable, es una herramienta esencial del Cálculo Integral que nos sirve para simplificar integrales complicadas, sobre todo las que tienen funciones compuestas. Básicamente, cambiamos la variable de integración para convertir una integral difícil en una que podemos resolver fácilmente con las reglas que ya conocemos. Esto es como aplicar la "Regla de la Cadena" de las derivadas, pero al revés.
+                    </p>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-[#003f5c] max-w-3xl mx-auto mb-8 text-left italic text-gray-700">
+                        <p class="font-bold text-[#003f5c] mb-2">Definición</p>
+                        <p class="text-sm">Esta técnica se llama sustitución porque se reemplaza una porción del integrando con la nueva variable $u$ y su diferencial $du$. También se le conoce como "cambio de variables", ya que precisamente ajusta todas las variables de la ecuación original para conseguir una expresión mucho más manejable, facilitando la aplicación de las reglas básicas de integración.</p>
+                        <p class="text-xs text-right mt-2 font-semibold text-gray-600">— OpenStax (s.f.)</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[#ffa600]">
+                            <h3 class="font-bold text-lg text-[#003f5c] mb-2">🧠 Competencias Analíticas</h3>
+                            <p class="text-sm">Ayuda a desarrollar el pensamiento lógico y la habilidad para ver patrones dentro de los problemas, lo cual es clave para simplificar tareas complicadas.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[#ff764a]">
+                            <h3 class="font-bold text-lg text-[#003f5c] mb-2">🛠️ Aplicaciones Prácticas</h3>
+                            <p class="text-sm">Nos permite hacer cálculos en la vida real. Es necesario para modelar cosas como el trabajo realizado, el área de superficies o el comportamiento de resortes y estructuras elásticas.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[#ef5675]">
+                            <h3 class="font-bold text-lg text-[#003f5c] mb-2">📐 Versatilidad Matemática</h3>
+                            <p class="text-sm">Es una herramienta sólida. Los ingenieros la usan constantemente para crear modelos matemáticos, diseñar sistemas y analizar procesos en casi cualquier especialidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dificultades" class="mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-[#003f5c] text-center mb-2">Obstáculos Cognitivos Comunes</h2>
+                    <p class="text-center max-w-2xl mx-auto mb-6">Aunque es una técnica poderosa, presenta desafíos comunes para los estudiantes. El siguiente gráfico muestra una estimación de la dificultad percibida para cada paso clave del proceso.</p>
+                    <div class="chart-container">
+                        <canvas id="dificultadesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="ejemplo-hooke" class="mb-12">
+                 <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-[#003f5c] text-center mb-2">Ejemplo 1: Cálculo de Trabajo (Ley de Hooke)</h2>
+                    <p class="text-center max-w-3xl mx-auto mb-8">
+                        Calcular el trabajo ($W$) que se necesita para estirar un resorte, donde la fuerza actúa de forma lineal ($F(x) = kx$). Aunque el cambio de variable aquí es muy directo ($u=x$), el ejemplo muestra la base de cómo se usa la integral para calcular el trabajo.
+                    </p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-xl font-bold text-[#003f5c] text-center mb-4">Relación Fuerza vs. Desplazamiento</h3>
+                            <p class="text-center text-sm mb-4">El área sombreada bajo la línea recta representa el trabajo total realizado.</p>
+                            <div class="chart-container h-64 md:h-80">
+                                <canvas id="resorteChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#003f5c] text-center mb-4">Proceso de Integración Paso a Paso</h3>
+                            <div class="w-full max-w-md mx-auto">
+                                <div class="flow-step bg-[#003f5c] text-white">1. Identificar la Integral de Trabajo <br> $$ W = \int_{0}^{a} kx dx $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#374c80] text-white">2. Aplicar Sustitución <br> $$ \text{Sea } u = x \Rightarrow du = dx $$</div>
+                                 <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#7a5195] text-white">3. Transformar Límites <br> $$ \text{Si } x=0, u=0. \text{ Si } x=a, u=a. $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#bc5090] text-white">4. Integrar con respecto a 'u' <br> $$ W = k \int_{0}^{a} u du = k \left[\frac{u^2}{2}\right]_{0}^{a} $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#ef5675] text-white">5. Evaluar y Obtener Resultado Final <br> $$ W = k\left(\frac{a^2}{2} - \frac{0^2}{2}\right) = \frac{1}{2}ka^2 $$</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ejemplo-area-curva" class="mb-12">
+                 <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-[#003f5c] text-center mb-2">Ejemplo 2: Área de Superficie Irregular</h2>
+                    <p class="text-center max-w-3xl mx-auto mb-8">
+                        Un ingeniero debe determinar la masa de una placa metálica, pero su densidad no es uniforme. Esta densidad se modela con la función $f(x) = x\sqrt{x^2 + 1}$, desde $x=0$ hasta $x=3$. Resolver esto requiere usar el método de sustitución.
+                    </p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-[#003f5c] text-center mb-4">Modelo de Densidad Irregular</h3>
+                            <p class="text-center text-sm mb-4">El área bajo la curva representa la masa total de la placa.</p>
+                            <div class="chart-container h-64 md:h-80">
+                                <canvas id="curvaDensidadChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-[#003f5c] text-center mb-4">Proceso de Integración Paso a Paso</h3>
+                            <div class="w-full max-w-md mx-auto">
+                                <div class="flow-step bg-[#003f5c] text-white">1. Establecer la Integral de Área <br> $$ A = \int_{0}^{3} x\sqrt{x^2 + 1} dx $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#374c80] text-white">2. Aplicar Sustitución Clave <br> $$ \text{Sea } u = x^2 + 1 \Rightarrow du = 2x dx $$</div>
+                                 <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#7a5195] text-white">3. Transformar Límites (u) <br> $$ \text{Si } x=0, u=1. \text{ Si } x=3, u=10. $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#bc5090] text-white">4. Integrar con respecto a 'u' <br> $$ A = \frac{1}{2} \int_{1}^{10} u^{1/2} du = \frac{1}{2} \left[\frac{2}{3} u^{3/2}\right]_{1}^{10} $$</div>
+                                <div class="flow-arrow">↓</div>
+                                <div class="flow-step bg-[#ef5675] text-white">5. Evaluar y Obtener Área Final <br> $$ A = \frac{1}{3} (10\sqrt{10} - 1) \approx 10.21 \text{ u}^2 $$</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="aplicaciones" class="mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-[#003f5c] text-center mb-2">Aplicaciones en Diversas Ramas de la Ingeniería</h2>
+                    <p class="text-center max-w-2xl mx-auto mb-6">El método de sustitución es una herramienta transversal utilizada para resolver problemas en múltiples disciplinas de la ingeniería.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container">
+                            <canvas id="aplicacionesChart"></canvas>
+                        </div>
+                        <div class="text-left">
+                            <p class="mb-4">Este método es importante para:</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li class="font-semibold text-[#003f5c]">Ingeniería Mecánica: <span class="font-normal">Análisis de sistemas elásticos, dinámica de fluidos y transferencia de calor.</span></li>
+                                <li class="font-semibold text-[#7a5195]">Ingeniería Eléctrica: <span class="font-normal">Cálculo de campos electromagnéticos, análisis de circuitos RLC y procesamiento de señales.</span></li>
+                                <li class="font-semibold text-[#bc5090]">Ingeniería Civil: <span class="font-normal">Cálculo de centroides, momentos de inercia en estructuras y análisis de distribución de cargas.</span></li>
+                                <li class="font-semibold text-[#ffa600]">Otras Áreas: <span class="font-normal">Incluyendo la ingeniería química para la cinética de reacciones y la bioingeniería para modelar sistemas biológicos.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 text-gray-500 text-sm">
+            <p class="mt-4 font-bold text-gray-700">AUTORES:</p>
+            <p>Juan Pablo Arenas Montoya, Jaime Andrés Botero Ochoa, Henry Caicedo Rodríguez.</p>
+            <p>Universidad Incca de Colombia</p>
+            
+            <p class="mt-4 font-bold text-gray-700">REFERENCIAS:</p>
+            
+            <p class="text-xs mt-1 text-left md:text-center">1. OpenStax. (s.f.). *Cálculo, volumen 1*. [https://openstax.org/details/books/cálculo-volumen-1]</p>
+            <p class="text-xs text-left md:text-center">2. Stewart, J. (2018). *Cálculo de una variable: Trascendentes tempranas* (8.ª ed.). Cengage Learning.</p>
+            <p class="text-xs text-left md:text-center">3. Leithold, L. (2006). *El Cálculo* (7.ª ed.). Oxford University Press.</p>
+            
+        </footer>
+        </div>
+
+    <script>
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            }
+            return label;
+        };
+
+        const wrapLabel = (label) => {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+        
+        const ctxDificultades = document.getElementById('dificultadesChart').getContext('2d');
+        const dificultadesChart = new Chart(ctxDificultades, {
+            type: 'bar',
+            data: {
+                labels: ['Identificar la Sustitución Adecuada (u)', 'Manipulación Algebraica', 'Reemplazo de Límites de Integración'].map(wrapLabel),
+                datasets: [{
+                    label: 'Nivel de Dificultad Percibido',
+                    data: [85, 65, 75],
+                    backgroundColor: ['#003f5c', '#7a5195', '#ef5675'],
+                    borderColor: ['#003f5c', '#7a5195', '#ef5675'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                           display: true,
+                           text: 'Dificultad (0-100)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxResorte = document.getElementById('resorteChart').getContext('2d');
+        const k = 10;
+        const a = 5;
+        const resorteData = Array.from({length: a + 1}, (_, i) => ({x: i, y: k * i}));
+        
+        const resorteChart = new Chart(ctxResorte, {
+            type: 'line',
+            data: {
+                labels: resorteData.map(p => p.x),
+                datasets: [{
+                    label: 'Fuerza (N)',
+                    data: resorteData.map(p => p.y),
+                    borderColor: '#ff764a',
+                    backgroundColor: 'rgba(255, 118, 74, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Desplazamiento x (m)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Fuerza F(x) (N)'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                     tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        // NUEVO GRÁFICO: CURVA DE DENSIDAD (Área bajo la curva)
+        const ctxCurvaDensidad = document.getElementById('curvaDensidadChart').getContext('2d');
+        const xValues = Array.from({length: 31}, (_, i) => i * 0.1); // x de 0.0 a 3.0
+        const yValues = xValues.map(x => x * Math.sqrt(x*x + 1)); // f(x) = x * sqrt(x^2 + 1)
+        
+        const curvaDensidadChart = new Chart(ctxCurvaDensidad, {
+            type: 'line',
+            data: {
+                labels: xValues.map(x => x.toFixed(1)),
+                datasets: [{
+                    label: 'Función de Densidad f(x)',
+                    data: yValues,
+                    borderColor: '#bc5090',
+                    backgroundColor: 'rgba(188, 80, 144, 0.4)',
+                    fill: 'origin', // Rellena el área bajo la curva
+                    tension: 0.4,
+                    pointRadius: 0 // Ocultar puntos
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Distancia x'
+                        },
+                        min: 0,
+                        max: 3
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Densidad f(x)'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                     tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxAplicaciones = document.getElementById('aplicacionesChart').getContext('2d');
+        const aplicacionesChart = new Chart(ctxAplicaciones, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ing. Mecánica', 'Ing. Eléctrica', 'Ing. Civil', 'Otras Áreas'],
+                datasets: [{
+                    label: 'Aplicaciones',
+                    data: [40, 30, 20, 10],
+                    backgroundColor: ['#003f5c', '#7a5195', '#bc5090', '#ffa600'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                     tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
